@@ -2,6 +2,7 @@ import Builder from './Builder';
 import Spec from './Spec';
 import { FigureBiblioEntry } from './Biblio';
 import { Context } from './Context';
+
 export default class Figure extends Builder {
   type: string;
   number: number;

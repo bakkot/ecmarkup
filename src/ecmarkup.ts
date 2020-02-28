@@ -1,8 +1,8 @@
 import Spec from './Spec';
-import Biblio = require('./Biblio');
-import BiblioEntry = Biblio.BiblioEntry;
-import utils = require('./utils');
 import { CancellationToken } from 'prex';
+const Biblio = require('./Biblio');
+const utils = require('./utils');
+const BiblioEntry = Biblio.BiblioEntry;
 var __awaiter = require('./awaiter'); // eslint-disable-line no-var
 
 export { Spec, BiblioEntry };

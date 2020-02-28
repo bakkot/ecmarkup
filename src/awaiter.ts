@@ -1,4 +1,4 @@
-import Promise = require('bluebird');
+const Promise = require('bluebird');
 
 /**
  * Patch for TypeScript's __awaiter helper. While generally unsupported, it is acceptable to

@@ -1,7 +1,7 @@
 import Builder from './Builder';
-import emd = require('ecmarkdown');
 import { Context } from './Context';
 import Grammar from './Grammar';
+const emd = require('ecmarkdown');
 var __awaiter = require('./awaiter'); // eslint-disable-line no-var
 
 /*@internal*/

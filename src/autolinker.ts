@@ -2,8 +2,8 @@ import Spec from './Spec';
 import Clause from './Clause';
 import Xref from './Xref';
 import Biblio, { BiblioEntry } from './Biblio';
-import escape = require('html-escape');
-import utils = require('./utils');
+const escape: (str: string) => string = require('html-escape');
+import { replaceTextNode } from './utils';
 
 export const NO_CLAUSE_AUTOLINK = new Set([
   'PRE',
@@ -46,7 +46,7 @@ export function autolink(node: Node, replacer: RegExp, autolinkmap: AutoLinkMap,
 
   if (autolinked !== content) {
     template.innerHTML = autolinked;
-    const newXrefNodes = utils.replaceTextNode(node, template.content);
+    const newXrefNodes = replaceTextNode(node, template.content);
     const newXrefs = newXrefNodes.map(node =>
       new Xref(spec, node as HTMLElement, clause as Clause, clause.namespace, node.getAttribute('href')!, node.getAttribute('aoid')!)
     );

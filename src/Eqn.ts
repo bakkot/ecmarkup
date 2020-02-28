@@ -1,9 +1,9 @@
 import Builder from './Builder';
-import emd = require('ecmarkdown');
-import utils = require('./utils');
 import Spec from './Spec';
 import { AlgorithmBiblioEntry } from './Biblio';
 import { Context } from './Context';
+import { shouldInline } from './utils';
+import { document as emdDocument } from 'ecmarkdown';
 
 /*@internal*/
 export default class Eqn extends Builder {
@@ -41,9 +41,9 @@ export default class Eqn extends Builder {
     const clause = clauseStack[clauseStack.length - 1];
     const id = clause ? clause.id : ''; // TODO: no eqns outside of clauses, eh?
     const eqn = new Eqn(spec, node, id); // TODO: this variable is unused, but apparently it has side effects. Removing this line removes emu-xrefs
-    let contents = emd.document(node.innerHTML).slice(3, -4);
+    let contents = emdDocument(node.innerHTML).slice(3, -4);
 
-    if (utils.shouldInline(node)) {
+    if (shouldInline(node)) {
       const classString = node.getAttribute('class');
       let classes: string[];
 

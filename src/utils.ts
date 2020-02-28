@@ -1,8 +1,8 @@
-import jsdom = require('jsdom');
-import chalk = require('chalk');
+const jsdom = require('jsdom');
+const chalk = require('chalk');
 import Spec from './Spec';
-import emd = require('ecmarkdown');
-import fs = require('fs');
+const emd = require('ecmarkdown');
+import { readFile as fsReadFile, writeFile as fsWriteFile } from 'fs';
 
 /*@internal*/
 export function emdTextNode(spec: Spec, node: Node) {
@@ -74,7 +74,7 @@ export function logWarning(str: string) {
 }
 
 /*@internal*/
-export function shouldInline(node: Node) {
+export function shouldInline(node: Node) : boolean {
   let parent = node.parentNode;
   if (!parent) return false;
 
@@ -90,14 +90,14 @@ export function shouldInline(node: Node) {
 /*@internal*/
 export function readFile(file: string) {
   return new Promise<string>((resolve, reject) => {
-    fs.readFile(file, 'utf8', (err, data) => err ? reject(err) : resolve(data));
+    fsReadFile(file, 'utf8', (err, data) => err ? reject(err) : resolve(data));
   });
 }
 
 /*@internal*/
 export function writeFile(file: string, content: string) {
   return new Promise<void>((resolve, reject) => {
-    fs.writeFile(file, content, { encoding: 'utf8' }, err => err ? reject(err) : resolve());
+    fsWriteFile(file, content, { encoding: 'utf8' }, err => err ? reject(err) : resolve());
   });
 }
 

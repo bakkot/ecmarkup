@@ -1,11 +1,13 @@
-const args = require('./args').parse();
+import { parseArgs } from './args';
+const args = parseArgs();
 
 
 // requires after arg checking to avoid expensive load times
-import ecmarkup = require('./ecmarkup');
-import fs = require('fs');
-import utils = require('./utils');
-import debounce = require('promise-debounce');
+import type { FSWatcher } from 'fs';
+import { build as ecmarkupBuild } from './ecmarkup';
+const fs = require('fs');
+const utils = require('./utils');
+const debounce = require('promise-debounce');
 var __awaiter = require('./awaiter'); // eslint-disable-line no-var
 
 // back compat to old argument names
@@ -17,10 +19,10 @@ if (args.js) {
   args.jsOut = args.js;
 }
 
-const watching = new Map<string, fs.FSWatcher>();
-const build = debounce(async function build() {
+const watching = new Map<string, FSWatcher>();
+const build: () => Promise<void> = debounce(async function build() : Promise<void> {
   try {
-    const spec = await ecmarkup.build(args.infile, utils.readFile, args);
+    const spec = await ecmarkupBuild(args.infile, utils.readFile, args);
 
     const pending: Promise<any>[] = [];
     if (args.biblio) {
