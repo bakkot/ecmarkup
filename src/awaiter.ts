@@ -8,6 +8,6 @@ const Promise = require('bluebird');
  * 
  * We use a custom __awaiter for performance reasons - bluebird is still faster than native promises.
  */
-export = function (thisArg: any, _arguments: any, P: PromiseConstructorLike, generator: any) {
+export default function (thisArg: any, _arguments: any, P: PromiseConstructorLike, generator: any) {
   return (<any>Promise).coroutine(generator, { yieldHandler: Promise.cast }).apply(thisArg, _arguments);
 };

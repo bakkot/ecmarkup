@@ -47,6 +47,11 @@
 		"promise-debounce": "^1.0.1"
 	},
 	"devDependencies": {
+		"@babel/cli": "^7.8.4",
+		"@babel/core": "^7.8.6",
+		"@babel/plugin-transform-modules-commonjs": "^7.8.3",
+		"@babel/plugin-transform-typescript": "^7.8.3",
+		"@babel/preset-typescript": "^7.8.3",
 		"@types/bluebird": "^3.5.29",
 		"@types/chalk": "^0.4.31",
 		"@types/he": "^1.1.0",
@@ -56,6 +61,7 @@
 		"@types/node": "^13.1.8",
 		"@types/nomnom": "0.0.27",
 		"auto-changelog": "^1.16.2",
+		"babel-cli": "^6.26.0",
 		"diff": "^2.2.3",
 		"eslint": "^6.8.0",
 		"mocha": "^5.2.0",

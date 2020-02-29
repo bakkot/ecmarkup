@@ -1,7 +1,7 @@
 import Builder from './Builder';
-import Spec from './Spec';
-const utils = require('./utils');
-const path = require('path');
+import type Spec from './Spec';
+import * as utils from './utils';
+import * as path from 'path';
 
 var __awaiter = require('./awaiter'); // eslint-disable-line no-var
 

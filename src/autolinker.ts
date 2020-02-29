@@ -1,9 +1,13 @@
-import Spec from './Spec';
-import Clause from './Clause';
+import type Spec from './Spec';
+import type Clause from './Clause';
+import type Biblio from './Biblio';
+import type { BiblioEntry } from './Biblio';
 import Xref from './Xref';
-import Biblio, { BiblioEntry } from './Biblio';
-const escape: (str: string) => string = require('html-escape');
-import { replaceTextNode } from './utils';
+import escape from 'html-escape';
+import * as utils from './utils';
+
+// Why does this need an explicit type annotation? I have no idea.
+const replaceTextNode: (node: Node, frag: DocumentFragment) => Array<Element> = utils.replaceTextNode;
 
 export const NO_CLAUSE_AUTOLINK = new Set([
   'PRE',

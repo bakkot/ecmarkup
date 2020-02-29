@@ -1,7 +1,8 @@
-const path = require('path');
-const nomnom = require('nomnom');
+import path from 'path';
+import * as nomnom from 'nomnom';
 
-export const parseArgs = nomnom.script('ecmarkup')
+// typescript is not powerful enough to type this correctly afaik
+export const parseArgs: () => { [key: string]: string } = (nomnom.script('ecmarkup')
   .help('Compile ecmarkup documents to html by passing your input file and output file.')
   .options({
     help: { abbr: 'h', flag: true, help: 'Display this help message' },
@@ -29,7 +30,7 @@ export const parseArgs = nomnom.script('ecmarkup')
       position: 1,
       help: 'Output html or biblio file',
     }
-  });
+  }) as any);
 
 function printVersion() {
   const p = require(path.resolve(__dirname, '..', 'package.json'));

@@ -1,11 +1,12 @@
 {
     "compilerOptions": {
-        "target": "es6",
+        "target": "es2019",
         "module": "commonjs",
         "moduleResolution": "node",
         "strict": true,
-        "declaration": true,
+        "declaration": false,
         "stripInternal": true,
+        "esModuleInterop": true,
         "outDir": "../lib",
         "lib": ["es5", "es2015", "dom"],
         "typeRoots": [

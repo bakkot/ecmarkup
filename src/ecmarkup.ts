@@ -1,11 +1,12 @@
 import Spec from './Spec';
 import { CancellationToken } from 'prex';
-const Biblio = require('./Biblio');
-const utils = require('./utils');
-const BiblioEntry = Biblio.BiblioEntry;
+import type Biblio from './Biblio';
+import type BiblioEntry from './Biblio';
+
+import * as utils from './utils';
 var __awaiter = require('./awaiter'); // eslint-disable-line no-var
 
-export { Spec, BiblioEntry };
+export type { Spec, BiblioEntry };
 
 export class Boilerplate {
   address?: string;

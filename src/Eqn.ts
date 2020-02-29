@@ -1,7 +1,7 @@
 import Builder from './Builder';
-import Spec from './Spec';
-import { AlgorithmBiblioEntry } from './Biblio';
-import { Context } from './Context';
+import type Spec from './Spec';
+import type { AlgorithmBiblioEntry } from './Biblio';
+import type { Context } from './Context';
 import { shouldInline } from './utils';
 import { document as emdDocument } from 'ecmarkdown';
 

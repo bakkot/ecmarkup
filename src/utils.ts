@@ -1,8 +1,8 @@
-const jsdom = require('jsdom');
-const chalk = require('chalk');
-import Spec from './Spec';
-const emd = require('ecmarkdown');
-import { readFile as fsReadFile, writeFile as fsWriteFile } from 'fs';
+import type Spec from './Spec';
+import * as jsdom from 'jsdom';
+import * as chalk from 'chalk';
+import * as emd from 'ecmarkdown';
+import * as fs from 'fs';
 
 /*@internal*/
 export function emdTextNode(spec: Spec, node: Node) {
@@ -38,8 +38,7 @@ export function domWalkBackward(root: Node, cb: (node: Element) => boolean | und
   }
 }
 
-/*@internal*/
-export function replaceTextNode(node: Node, frag: DocumentFragment) {
+export function replaceTextNode(node: Node, frag: DocumentFragment){
   // Append all the nodes
   const parent = node.parentNode;
   if (!parent) return [];
@@ -90,14 +89,14 @@ export function shouldInline(node: Node) : boolean {
 /*@internal*/
 export function readFile(file: string) {
   return new Promise<string>((resolve, reject) => {
-    fsReadFile(file, 'utf8', (err, data) => err ? reject(err) : resolve(data));
+    fs.readFile(file, 'utf8', (err, data) => err ? reject(err) : resolve(data));
   });
 }
 
 /*@internal*/
 export function writeFile(file: string, content: string) {
   return new Promise<void>((resolve, reject) => {
-    fsWriteFile(file, content, { encoding: 'utf8' }, err => err ? reject(err) : resolve());
+    fs.writeFile(file, content, { encoding: 'utf8' }, err => err ? reject(err) : resolve());
   });
 }
 

@@ -1,11 +1,11 @@
 import RHS from './RHS';
 import Terminal from './Terminal';
 import Builder from './Builder';
-import Spec from './Spec';
-import { ProductionBiblioEntry } from './Biblio';
-import { Context } from './Context';
-const utils = require('./utils');
-const GrammarAnnotation = require('./GrammarAnnotation');
+import type Spec from './Spec';
+import type { ProductionBiblioEntry } from './Biblio';
+import type { Context } from './Context';
+import * as utils from './utils';
+import GrammarAnnotation from './GrammarAnnotation';
 
 /*@internal*/
 export default class Production extends Builder {

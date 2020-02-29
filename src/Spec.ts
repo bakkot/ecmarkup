@@ -1,10 +1,9 @@
-const path = require('path');
-const fs = require('fs');
-const yaml = require('js-yaml');
+import * as path from 'path';
+import * as fs from 'fs';
+import * as yaml from 'js-yaml';
 import * as utils from './utils';
-const hljs = require('highlight.js');
+import * as hljs from 'highlight.js';
 import { Options } from './ecmarkup';
-const _Builder = require('./Builder');
 // Builders
 import { Context } from './Context';
 import Builder from './Builder';
