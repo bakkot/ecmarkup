@@ -3,7 +3,7 @@ import type Spec from './Spec';
 import type { AlgorithmBiblioEntry } from './Biblio';
 import type { Context } from './Context';
 import { shouldInline } from './utils';
-import { document as emdDocument } from 'ecmarkdown';
+import * as emd from 'ecmarkdown';
 
 /*@internal*/
 export default class Eqn extends Builder {
@@ -41,7 +41,7 @@ export default class Eqn extends Builder {
     const clause = clauseStack[clauseStack.length - 1];
     const id = clause ? clause.id : ''; // TODO: no eqns outside of clauses, eh?
     const eqn = new Eqn(spec, node, id); // TODO: this variable is unused, but apparently it has side effects. Removing this line removes emu-xrefs
-    let contents = emdDocument(node.innerHTML).slice(3, -4);
+    let contents = emd.document(node.innerHTML).slice(3, -4);
 
     if (shouldInline(node)) {
       const classString = node.getAttribute('class');

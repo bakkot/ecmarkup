@@ -1,7 +1,7 @@
 import Builder from './Builder';
 import { Context } from './Context';
 import Grammar from './Grammar';
-import { document as emdDocument} from 'ecmarkdown';
+import * as emd from 'ecmarkdown';
 var __awaiter = require('./awaiter'); // eslint-disable-line no-var
 
 /*@internal*/
@@ -19,7 +19,7 @@ export default class Algorithm extends Builder {
     }
     // replace spaces after !/? with &nbsp; to prevent bad line breaking
     const contents = node.innerHTML.replace(/(\s+[!?])\s+(\w+\s*\()/g, '$1&nbsp;$2');
-    const html = emdDocument(contents);
+    const html = emd.document(contents);
     node.innerHTML = html;
     context.inAlg = true;
   }
