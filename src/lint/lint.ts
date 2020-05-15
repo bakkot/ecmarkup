@@ -18,6 +18,7 @@ import {
 
 import { getLocation, getProductions, rhsMatches } from './utils';
 import lintAlgorithmLineEndings from './rules/algorithm-line-endings';
+import lintAlgorithmDefBeforeUse from './rules/algorithm-def-before-use';
 
 function composeObservers(...observers: Observer[]): Observer {
   return {
@@ -34,7 +35,10 @@ function composeObservers(...observers: Observer[]): Observer {
   };
 }
 
-let algorithmRules = [lintAlgorithmLineEndings];
+let algorithmRules = [
+  lintAlgorithmLineEndings,
+  // lintAlgorithmDefBeforeUse,
+];
 
 export type LintingError = { line: number; column: number; message: string };
 
@@ -64,7 +68,7 @@ export function lint(
 
   let sdos: { grammar: Element; alg: Element }[] = [];
   let earlyErrors: { grammar: Element; lists: HTMLUListElement[] }[] = [];
-  let algorithms: { element: Element; tree?: EcmarkdownNode }[] = [];
+  let algorithms: { element: Element; tree?: EcmarkdownNode, inAnnexB: boolean }[] = [];
   let inAnnexB = false;
   let lintWalker = document.createTreeWalker(document.body, 1 /* elements */);
   function visitCurrentNode() {
@@ -142,7 +146,7 @@ export function lint(
     }
 
     if (node.nodeName === 'EMU-ALG' && node.getAttribute('type') !== 'example') {
-      algorithms.push({ element: node });
+      algorithms.push({ element: node, inAnnexB });
     }
 
     let firstChild = lintWalker.firstChild();
@@ -354,11 +358,12 @@ export function lint(
       lintingErrors.push({ line: trueLine, column: trueCol, message });
     };
 
-    let observer = composeObservers(...algorithmRules.map(f => f(reporter, element)));
+    let source = sourceText.slice(location.startTag.endOffset, location.endTag.startOffset);
     let tree = parseAlgorithm(
-      sourceText.slice(location.startTag.endOffset, location.endTag.startOffset),
+      source,
       { trackPositions: true }
     );
+    let observer = composeObservers(...algorithmRules.map(f => f(reporter, element, source, algorithm.inAnnexB)));
     visit(tree, observer);
     algorithm.tree = tree;
   }
@@ -370,6 +375,7 @@ export function lint(
     lintingErrors.sort((a, b) => a.line - b.line);
     report(lintingErrors);
   }
+  // process.exit(0);
 
   // *******************
   // Stash intermediate results for later use

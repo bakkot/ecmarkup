@@ -202,7 +202,6 @@ export default class Spec {
     this._log('Building boilerplate...');
     this.buildBoilerplate();
 
-    this._log('Walking document, building various elements...');
     const context: Context = {
       spec: this,
       node: this.doc.body,
@@ -227,6 +226,8 @@ export default class Spec {
       }
       lint(this.opts.reportLintErrors, source, this.dom, document);
     }
+
+    this._log('Walking document, building various elements...');
 
     const walker = document.createTreeWalker(document.body, 1 | 4 /* elements and text nodes */);
 

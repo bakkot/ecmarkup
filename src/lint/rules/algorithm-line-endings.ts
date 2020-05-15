@@ -1,10 +1,7 @@
 import type { Node as EcmarkdownNode, Observer } from 'ecmarkdown';
 import type { Reporter } from '../algorithm-error-reporter-type';
 
-export default function (report: Reporter, node: Element): Observer {
-  if (node.getAttribute('type') === 'example') {
-    return {};
-  }
+export default function (report: Reporter, node: Element, source: string, inAnnexB: boolean): Observer {
   return {
     enter(node: EcmarkdownNode) {
       if (node.name !== 'ordered-list-item') {
